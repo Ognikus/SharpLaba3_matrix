@@ -94,19 +94,38 @@ namespace Laba3
         private void button1_Click(object sender, EventArgs e)
         {
             //создание матрицы
-            m = Convert.ToInt32(textBox1.Text);
-            n = Convert.ToInt32(textBox2.Text);
-            A = new double[m, n];
-            //Чистка DGView, если они не пусты
-            int k = 0;
-            k = dataGridView1.ColumnCount;
-            if (k != 0)
-                for (int i = 0; i < k; i++)
-                    dataGridView1.Columns.RemoveAt(0);
-            //Заполнение DGView столбцами
-            AddColumns(m, dataGridView1);
-            //Заполнение DGView строками
-            AddRows(n, dataGridView1);
+         
+            var stt1 = textBox1.Text;
+            var stt2 = textBox2.Text;
+            if (Double.TryParse(stt1, out var res))
+            {
+                if (Double.TryParse(stt2, out var res1))
+                {
+                    m = Convert.ToInt32(textBox1.Text);
+                    n = Convert.ToInt32(textBox2.Text);
+                    A = new double[m, n];
+                    //Чистка DGView, если они не пусты
+                    int k = 0;
+                    k = dataGridView1.ColumnCount;
+                    if (k != 0)
+                        for (int i = 0; i < k; i++)
+                            dataGridView1.Columns.RemoveAt(0);
+                    //Заполнение DGView столбцами
+                    AddColumns(m, dataGridView1);
+                    //Заполнение DGView строками
+                    AddRows(n, dataGridView1);
+                }
+                else
+                {
+                    errorProvider1.SetError(textBox2, "Необходимо ввести цифры!");
+                }
+
+            }
+            else
+            {
+                errorProvider1.SetError(textBox1, "Необходимо ввести цифры!");
+            }
+
         }
     }
 }
